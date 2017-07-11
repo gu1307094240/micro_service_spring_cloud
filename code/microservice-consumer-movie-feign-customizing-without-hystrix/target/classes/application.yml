@@ -1,0 +1,25 @@
+server: 
+  port: 7901
+spring: 
+  application:
+    name: microservice-consumer-movie
+eureka: 
+  client: 
+    healthcheck: 
+      enabled: true
+    serviceUrl: 
+      defaultZone: http://admin:root@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+        
+logging:
+  level:
+    com.gu.cloud.springcloudconsumermovie.feign.UserFeignClient: DEBUG
+    
+# 解决第一次请求Time-out的方案（原因：hystrix默认超时时间是1s）
+# 1.设置超时时间：5s
+hystrix.command.defaule.execution.isolation.thread.timeoutInMilliseconds: 5000
+# 2.取消超时时间限制
+#hystrix.command.default.execution.timeout.enable: false
+# 3.直接取消hystrix支持
+#feign.hystrix.enabled: false

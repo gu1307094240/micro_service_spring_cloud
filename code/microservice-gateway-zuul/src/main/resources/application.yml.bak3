@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: microservice-gateway-zuul
+server: 
+  port: 8040
+eureka: 
+  client: 
+    service-url:
+      defaultZone: http://admin:root@localhost:8761/eureka  #http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+zuul:
+  routes:
+    users: #任意，唯一
+      path: /user-url/**  #路径请求
+      url: http://192.168.1.5:7900/
